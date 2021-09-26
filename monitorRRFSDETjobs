@@ -1,0 +1,12 @@
+#!/bin/bash
+export TZ="America/Denver"
+
+maxjoblength=40
+myuser=`echo $USER`
+usrlen=${#myuser}
+outformat="%.10i %.5P %.${maxjoblength}j %.8T %.9M %.9l %.${usrlen}u %.8a %.5D"
+logfile=/lfs1/BMC/wrfruc/gge/rrfsdet/rrfsdet.log
+
+dateinfo=`date +%Y%m%d_%H%M`
+qinfo=`/apps/slurm/default/bin/squeue -R rrfsdet -o "$outformat"`
+echo -e "$dateinfo\n$qinfo"  >> $logfile
